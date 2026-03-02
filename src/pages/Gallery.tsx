@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import ScrollReveal from "@/components/ScrollReveal";
 
 import galleryStudy from "@/assets/gallery-study-area.jpg";
 import galleryTech from "@/assets/gallery-tech.jpg";
@@ -43,35 +44,37 @@ const Gallery = () => {
       {/* Filters */}
       <section className="py-12">
         <div className="container mx-auto px-4">
-          <div className="flex flex-wrap gap-2 justify-center mb-10">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setFilter(cat)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                  filter === cat ? "bg-gradient-gold text-primary-foreground shadow-warm" : "bg-card text-muted-foreground hover:text-foreground border border-border"
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
+          <ScrollReveal>
+            <div className="flex flex-wrap gap-2 justify-center mb-10">
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setFilter(cat)}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                    filter === cat ? "bg-gradient-gold text-primary-foreground shadow-warm" : "bg-card text-muted-foreground hover:text-foreground border border-border"
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </ScrollReveal>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filtered.map((img, i) => (
-              <button
-                key={`${img.src}-${i}`}
-                onClick={() => setLightbox(i)}
-                className="group relative aspect-[4/3] rounded-xl overflow-hidden shadow-warm hover:shadow-warm-lg transition-all duration-300 animate-fade-in-up"
-                style={{ animationDelay: `${i * 80}ms` }}
-              >
-                <img src={img.src} alt={img.caption} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/50 transition-colors duration-300 flex items-end p-4">
-                  <span className="text-primary-foreground text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    {img.caption}
-                  </span>
-                </div>
-              </button>
+              <ScrollReveal key={`${img.src}-${i}`} delay={i * 0.06}>
+                <button
+                  onClick={() => setLightbox(i)}
+                  className="group relative aspect-[4/3] rounded-xl overflow-hidden shadow-warm hover:shadow-warm-lg transition-all duration-300 w-full"
+                >
+                  <img src={img.src} alt={img.caption} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/50 transition-colors duration-300 flex items-end p-4">
+                    <span className="text-primary-foreground text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      {img.caption}
+                    </span>
+                  </div>
+                </button>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -88,15 +91,17 @@ const Gallery = () => {
       )}
 
       {/* CTA */}
-      <section className="py-16 bg-gradient-section text-center">
-        <div className="container mx-auto px-4">
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4">Ready to Visit?</h2>
-          <p className="text-muted-foreground mb-6">Come experience Kaivalya Library in person.</p>
-          <Button variant="hero" size="lg" asChild>
-            <Link to="/contact">Contact Us</Link>
-          </Button>
-        </div>
-      </section>
+      <ScrollReveal>
+        <section className="py-16 bg-gradient-section text-center">
+          <div className="container mx-auto px-4">
+            <h2 className="font-display text-2xl font-bold text-foreground mb-4">Ready to Visit?</h2>
+            <p className="text-muted-foreground mb-6">Come experience Kaivalya Library in person.</p>
+            <Button variant="hero" size="lg" asChild>
+              <Link to="/contact">Contact Us</Link>
+            </Button>
+          </div>
+        </section>
+      </ScrollReveal>
     </div>
   );
 };
