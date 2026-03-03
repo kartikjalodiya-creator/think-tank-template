@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Wifi, Monitor, Droplets, Car, Clock, Armchair, ShieldCheck, Lightbulb, Plug } from "lucide-react";
+import { Wifi, Monitor, Droplets, Car, Clock, Armchair, ShieldCheck, Lightbulb, Plug, Cctv } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import galleryStudy from "@/assets/gallery-study-area.jpg";
 import galleryTech from "@/assets/gallery-tech.jpg";
@@ -20,6 +20,7 @@ const facilities = [
       { icon: ShieldCheck, label: "Quiet Zones", desc: "Strict noise policy ensures a distraction-free environment" },
       { icon: Lightbulb, label: "Professional Ambiance", desc: "Well-lit spaces with warm, focused lighting" },
       { icon: Clock, label: "Climate Control", desc: "Air-conditioned for comfort in all seasons" },
+      { icon: Cctv, label: "CCTV Surveillance", desc: "Round-the-clock CCTV monitoring for safety and security" },
     ],
   },
   {

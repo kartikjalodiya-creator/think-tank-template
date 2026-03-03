@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Wifi, BookOpen, MapPin, Clock, Volume2, ArrowRight } from "lucide-react";
+import { Wifi, BookOpen, MapPin, Clock, Volume2, ArrowRight, Cctv } from "lucide-react";
 import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
 import heroImage from "@/assets/hero-library.jpg";
@@ -8,6 +8,7 @@ import heroImage from "@/assets/hero-library.jpg";
 const highlights = [
   { icon: Wifi, title: "High-Speed WiFi", desc: "Stay connected with 24/7 high-speed internet access at every desk." },
   { icon: Volume2, title: "Quiet Study Zones", desc: "Dedicated silent zones for focused, distraction-free studying." },
+  { icon: Cctv, title: "CCTV Surveillance", desc: "24/7 CCTV monitoring for a safe and secure study environment." },
   { icon: MapPin, title: "Prime Location", desc: "Conveniently located on AB Road, Dewas — easy to reach from anywhere." },
   { icon: Clock, title: "Flexible Hours", desc: "Open early morning to late night with flexible membership plans." },
 ];
