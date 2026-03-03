@@ -27,20 +27,18 @@ const milestones = [
 const About = () => (
   <div>
     {/* Header */}
-    <section className="relative py-28 bg-primary text-center overflow-hidden">
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-10 right-20 w-72 h-72 rounded-full bg-gold blur-3xl" />
-        <div className="absolute bottom-10 left-20 w-56 h-56 rounded-full bg-gold-light blur-3xl" />
+    <section className="relative py-32 bg-primary text-center overflow-hidden">
+      <div className="absolute inset-0 opacity-[0.04]">
+        <div className="absolute top-10 right-20 w-80 h-80 rounded-full bg-gold blur-3xl" />
+        <div className="absolute bottom-10 left-20 w-64 h-64 rounded-full bg-gold-light blur-3xl" />
       </div>
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-6 relative z-10">
         <ScrollReveal>
-          <span className="inline-block px-4 py-1.5 rounded-full bg-gold/20 text-gold text-sm font-semibold mb-5 tracking-wide uppercase">
-            Our Story
-          </span>
-          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-4">
-            About <span className="text-gradient-gold">Kaivalya Library</span>
+          <p className="text-gold/70 text-sm font-semibold tracking-widest uppercase mb-4">Our Story</p>
+          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-5">
+            About <span className="text-gradient-gold italic">Kaivalya Library</span>
           </h1>
-          <p className="text-primary-foreground/70 max-w-xl mx-auto text-lg">
+          <p className="text-primary-foreground/50 max-w-lg mx-auto text-lg leading-relaxed font-light">
             A vision to provide Dewas with a world-class self-study environment.
           </p>
         </ScrollReveal>
@@ -48,32 +46,30 @@ const About = () => (
     </section>
 
     {/* Owner Section */}
-    <section className="py-20">
-      <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-2 gap-14 items-center max-w-5xl mx-auto">
+    <section className="py-24">
+      <div className="container mx-auto px-6">
+        <div className="grid md:grid-cols-2 gap-16 items-center max-w-5xl mx-auto">
           <ScrollReveal direction="left">
             <div className="relative">
               <img src={galleryAmbiance} alt="Library atmosphere" className="rounded-2xl shadow-warm-lg w-full" />
-              <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-gradient-gold rounded-2xl flex items-center justify-center shadow-lg">
-                <Quote className="h-10 w-10 text-primary-foreground" />
+              <div className="absolute -bottom-5 -right-5 w-20 h-20 bg-gradient-gold rounded-2xl flex items-center justify-center shadow-lg">
+                <Quote className="h-8 w-8 text-primary-foreground" />
               </div>
             </div>
           </ScrollReveal>
           <ScrollReveal direction="right">
-            <span className="inline-block px-3 py-1 rounded-full bg-gold/10 text-gold text-xs font-semibold mb-4 tracking-wide uppercase">
-              Founder's Message
-            </span>
-            <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-5">
-              A Message from <span className="text-gradient-gold">Dharmendra Sir</span>
+            <p className="text-gold text-sm font-semibold tracking-widest uppercase mb-4">Founder's Message</p>
+            <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-6">
+              A Message from <span className="text-gradient-gold italic">Dharmendra Sir</span>
             </h2>
-            <div className="space-y-4 text-muted-foreground font-body leading-relaxed">
-              <p className="text-lg italic border-l-4 border-gold pl-4">
+            <div className="space-y-5 text-muted-foreground font-body leading-relaxed">
+              <p className="text-lg italic border-l-2 border-gold/40 pl-5 text-foreground/70">
                 "I started Kaivalya Library with a simple belief — every student deserves access to a quiet, professional, and affordable study space."
               </p>
               <p>Growing up in Dewas, I saw the challenges students face when trying to focus at home or in noisy environments. Kaivalya Library is my commitment to providing the best study environment in Dewas.</p>
               <p>From high-speed WiFi and comfortable seating to clean facilities and a disciplined atmosphere — every detail is designed to help you succeed.</p>
             </div>
-            <p className="mt-6 font-display font-semibold text-foreground text-lg">— Dharmendra Sir, Founder</p>
+            <p className="mt-8 font-display font-semibold text-foreground text-lg tracking-tight">— Dharmendra Sir, Founder</p>
           </ScrollReveal>
         </div>
       </div>
@@ -81,11 +77,14 @@ const About = () => (
 
     {/* Story Timeline */}
     <ScrollReveal>
-      <section className="py-16 bg-gradient-section">
-        <div className="container mx-auto px-4 max-w-3xl">
-          <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground text-center mb-10">
-            Our <span className="text-gradient-gold">Journey</span>
-          </h2>
+      <section className="py-20 bg-gradient-section">
+        <div className="container mx-auto px-6 max-w-3xl">
+          <div className="text-center mb-12">
+            <p className="text-gold text-sm font-semibold tracking-widest uppercase mb-3">Milestones</p>
+            <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground">
+              Our <span className="text-gradient-gold italic">Journey</span>
+            </h2>
+          </div>
           <div className="space-y-0">
             {milestones.map((m, i) => (
               <ScrollReveal key={i} delay={i * 0.15}>
@@ -94,9 +93,9 @@ const About = () => (
                     <div className="w-12 h-12 rounded-full bg-gradient-gold flex items-center justify-center text-primary-foreground font-bold text-sm shadow-lg shrink-0">
                       {m.year}
                     </div>
-                    {i < milestones.length - 1 && <div className="w-0.5 h-full bg-gold/20 mt-2 min-h-[2rem]" />}
+                    {i < milestones.length - 1 && <div className="w-px h-full bg-gold/15 mt-2 min-h-[2rem]" />}
                   </div>
-                  <div className="bg-card rounded-xl p-5 shadow-warm flex-1 mt-1">
+                  <div className="bg-card rounded-xl p-6 shadow-warm flex-1 mt-1 border border-border/50">
                     <p className="text-foreground font-medium">{m.event}</p>
                   </div>
                 </div>
@@ -104,7 +103,7 @@ const About = () => (
             ))}
           </div>
 
-          <div className="mt-10 text-center">
+          <div className="mt-12 text-center">
             <p className="text-muted-foreground font-body leading-relaxed max-w-2xl mx-auto">
               The name <span className="font-semibold text-foreground">"Kaivalya"</span> — meaning liberation or enlightenment — reflects our core belief that education and focused study are the path to personal freedom and success.
             </p>
@@ -114,22 +113,25 @@ const About = () => (
     </ScrollReveal>
 
     {/* Values */}
-    <section className="py-20">
-      <div className="container mx-auto px-4">
+    <section className="py-24">
+      <div className="container mx-auto px-6">
         <ScrollReveal>
-          <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground text-center mb-3">
-            What Makes Us <span className="text-gradient-gold">Different</span>
-          </h2>
-          <p className="text-muted-foreground text-center mb-10 max-w-lg mx-auto">
-            We're not just a library — we're a community built around focus and success.
-          </p>
+          <div className="text-center mb-14">
+            <p className="text-gold text-sm font-semibold tracking-widest uppercase mb-3">Our Values</p>
+            <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground">
+              What Makes Us <span className="text-gradient-gold italic">Different</span>
+            </h2>
+            <p className="text-muted-foreground mt-4 max-w-lg mx-auto leading-relaxed">
+              We're not just a library — we're a community built around focus and success.
+            </p>
+          </div>
         </ScrollReveal>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
           {values.map((v, i) => (
             <ScrollReveal key={v.title} delay={i * 0.1}>
-              <div className="text-center bg-card rounded-2xl p-7 shadow-warm h-full border border-border hover:-translate-y-1 transition-transform duration-300">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-gold flex items-center justify-center mx-auto mb-5 shadow-lg">
-                  <v.icon className="h-7 w-7 text-primary-foreground" />
+              <div className="text-center bg-card rounded-2xl p-8 shadow-warm h-full border border-border/50 hover:-translate-y-1 transition-all duration-500 group">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-gold flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-105 transition-transform duration-300">
+                  <v.icon className="h-6 w-6 text-primary-foreground" />
                 </div>
                 <h3 className="font-display font-bold text-foreground mb-2 text-lg">{v.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{v.desc}</p>
@@ -142,28 +144,28 @@ const About = () => (
 
     {/* Testimonials */}
     <ScrollReveal>
-      <section className="relative py-20 bg-primary overflow-hidden">
-        <div className="absolute inset-0 opacity-5">
+      <section className="relative py-24 bg-primary overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.03]">
           <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-gold blur-3xl" />
         </div>
-        <div className="container mx-auto px-4 max-w-5xl relative z-10">
-          <h2 className="font-display text-2xl md:text-3xl font-bold text-primary-foreground text-center mb-3">
-            What Our Members Say
-          </h2>
-          <p className="text-primary-foreground/50 text-center mb-12">
-            Real stories from real students
-          </p>
+        <div className="container mx-auto px-6 max-w-5xl relative z-10">
+          <div className="text-center mb-14">
+            <p className="text-gold/60 text-sm font-semibold tracking-widest uppercase mb-3">Testimonials</p>
+            <h2 className="font-display text-2xl md:text-3xl font-bold text-primary-foreground">
+              What Our Members Say
+            </h2>
+          </div>
           <div className="grid md:grid-cols-3 gap-6">
             {testimonials.map((t, i) => (
               <ScrollReveal key={t.name} delay={i * 0.1}>
-                <div className="bg-primary-foreground/5 backdrop-blur-sm border border-gold/20 rounded-2xl p-7 h-full flex flex-col">
-                  <Quote className="h-8 w-8 text-gold/40 mb-4" />
-                  <p className="text-primary-foreground/80 text-sm leading-relaxed mb-6 flex-1">
+                <div className="bg-primary-foreground/[0.04] backdrop-blur-sm border border-gold/10 rounded-2xl p-8 h-full flex flex-col">
+                  <Quote className="h-7 w-7 text-gold/25 mb-5" />
+                  <p className="text-primary-foreground/70 text-sm leading-relaxed mb-7 flex-1 italic">
                     "{t.quote}"
                   </p>
-                  <div className="border-t border-gold/10 pt-4">
+                  <div className="border-t border-gold/8 pt-5">
                     <p className="text-gold font-display font-bold text-sm">{t.name}</p>
-                    <p className="text-primary-foreground/40 text-xs">{t.role}</p>
+                    <p className="text-primary-foreground/35 text-xs mt-0.5">{t.role}</p>
                   </div>
                 </div>
               </ScrollReveal>
@@ -175,16 +177,16 @@ const About = () => (
 
     {/* CTA */}
     <ScrollReveal>
-      <section className="py-20 text-center">
-        <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto bg-card rounded-2xl p-10 shadow-warm-lg border border-border">
-            <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-3">
+      <section className="py-24 text-center">
+        <div className="container mx-auto px-6">
+          <div className="max-w-2xl mx-auto bg-card rounded-2xl p-12 shadow-warm-lg border border-border/50">
+            <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-4">
               Come See for Yourself
             </h2>
-            <p className="text-muted-foreground mb-8">
+            <p className="text-muted-foreground mb-10 leading-relaxed">
               Walk-ins are always welcome. Visit us anytime during operating hours and experience the Kaivalya difference.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button variant="hero" size="lg" asChild>
                 <Link to="/contact">Get Directions <ArrowRight className="h-4 w-4 ml-1" /></Link>
               </Button>
