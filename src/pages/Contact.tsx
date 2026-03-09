@@ -4,10 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { MapPin, Phone, Mail, Clock, Navigation, ArrowRight, CheckCircle } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Navigation, ArrowRight, CheckCircle, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import ScrollReveal from "@/components/ScrollReveal";
 import galleryEntrance from "@/assets/gallery-entrance.jpg";
+import { supabase } from "@/integrations/supabase/client";
 
 const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
