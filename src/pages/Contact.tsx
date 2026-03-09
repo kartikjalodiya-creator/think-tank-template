@@ -4,23 +4,37 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { MapPin, Phone, Mail, Clock, Navigation, ArrowRight, CheckCircle } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Navigation, ArrowRight, CheckCircle, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import ScrollReveal from "@/components/ScrollReveal";
 import galleryEntrance from "@/assets/gallery-entrance.jpg";
+import { supabase } from "@/integrations/supabase/client";
 
 const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", phone: "", subject: "", message: "" });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name || !form.email || !form.phone || !form.message) {
       toast.error("Please fill in all required fields.");
       return;
     }
-    setSubmitted(true);
-    toast.success("Message sent! We'll get back to you soon.");
+    setLoading(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("send-contact-email", {
+        body: form,
+      });
+      if (error) throw error;
+      setSubmitted(true);
+      toast.success("Message sent! We'll get back to you soon.");
+    } catch (err) {
+      console.error("Submit error:", err);
+      toast.error("Failed to send message. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -148,8 +162,8 @@ const Contact = () => {
                       <label className="text-sm font-medium text-foreground mb-1.5 block">Message *</label>
                       <Textarea placeholder="How can we help you?" rows={4} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} required maxLength={1000} />
                     </div>
-                    <Button type="submit" variant="hero" size="lg" className="w-full">
-                      Send Message <ArrowRight className="h-4 w-4" />
+                    <Button type="submit" variant="hero" size="lg" className="w-full" disabled={loading}>
+                      {loading ? <><Loader2 className="h-4 w-4 animate-spin" /> Sending...</> : <>Send Message <ArrowRight className="h-4 w-4" /></>}
                     </Button>
                   </form>
                 )}
