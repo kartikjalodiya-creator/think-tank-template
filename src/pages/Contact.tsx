@@ -162,8 +162,8 @@ const Contact = () => {
                       <label className="text-sm font-medium text-foreground mb-1.5 block">Message *</label>
                       <Textarea placeholder="How can we help you?" rows={4} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} required maxLength={1000} />
                     </div>
-                    <Button type="submit" variant="hero" size="lg" className="w-full">
-                      Send Message <ArrowRight className="h-4 w-4" />
+                    <Button type="submit" variant="hero" size="lg" className="w-full" disabled={loading}>
+                      {loading ? <><Loader2 className="h-4 w-4 animate-spin" /> Sending...</> : <>Send Message <ArrowRight className="h-4 w-4" /></>}
                     </Button>
                   </form>
                 )}
