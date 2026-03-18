@@ -41,7 +41,16 @@ Deno.serve(async (req) => {
       );
     }
 
-    // Send email notification using Supabase's built-in email
+    // Send email via Resend
+    const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
+    if (!RESEND_API_KEY) {
+      console.error("RESEND_API_KEY not configured");
+      return new Response(
+        JSON.stringify({ success: true, message: "Saved but email not sent (no API key)" }),
+        { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
     const subjectLine = subject
       ? `New Contact: ${subject} from ${name}`
       : `New Contact Form Submission from ${name}`;
@@ -58,15 +67,34 @@ Deno.serve(async (req) => {
       <p style="color: #666; margin-top: 16px;">Sent from Kaivalya Library Contact Form</p>
     `;
 
-    // Use Resend or similar - for now we'll use a simple fetch to send via SMTP
-    // Since Supabase doesn't have built-in arbitrary email sending, 
-    // we store in DB and can set up email later
-    // For immediate notification, we log it
-    console.log(`Contact form submission from ${name} (${email})`);
-    console.log(`Notification should be sent to: ${NOTIFY_EMAIL}`);
+    const resendRes = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${RESEND_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: "Kaivalya Library <onboarding@resend.dev>",
+        to: [NOTIFY_EMAIL],
+        subject: subjectLine,
+        html: emailHtml,
+      }),
+    });
+
+    const resendData = await resendRes.json();
+    if (!resendRes.ok) {
+      console.error("Resend error:", resendData);
+      // Still return success since DB save worked
+      return new Response(
+        JSON.stringify({ success: true, message: "Saved but email delivery failed" }),
+        { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    console.log("Email sent successfully:", resendData);
 
     return new Response(
-      JSON.stringify({ success: true, message: "Form submitted successfully" }),
+      JSON.stringify({ success: true, message: "Form submitted and notification sent" }),
       { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   } catch (err) {
