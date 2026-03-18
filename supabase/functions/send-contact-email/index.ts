@@ -83,18 +83,50 @@ Deno.serve(async (req) => {
 
     const resendData = await resendRes.json();
     if (!resendRes.ok) {
-      console.error("Resend error:", resendData);
-      // Still return success since DB save worked
-      return new Response(
-        JSON.stringify({ success: true, message: "Saved but email delivery failed" }),
-        { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
+      console.error("Resend error (notification):", resendData);
+    } else {
+      console.log("Notification email sent:", resendData);
     }
 
-    console.log("Email sent successfully:", resendData);
+    // Send confirmation email to the submitter
+    const confirmationHtml = `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <h2 style="color: #8B6914;">Thank you for contacting Kaivalya Library, ${name}!</h2>
+        <p>We've received your message and will get back to you shortly.</p>
+        <div style="background: #f9f6f0; padding: 16px; border-radius: 8px; margin: 20px 0;">
+          <p style="margin: 4px 0;"><strong>Subject:</strong> ${subject || "General Inquiry"}</p>
+          <p style="margin: 4px 0;"><strong>Your message:</strong></p>
+          <p style="margin: 4px 0; color: #555;">${message}</p>
+        </div>
+        <p>In the meantime, feel free to visit us at:</p>
+        <p><strong>141, Bhopal Square, AB Road, Dewas, Madhya Pradesh, India</strong></p>
+        <p style="color: #888; font-size: 12px; margin-top: 24px;">— The Kaivalya Library Team</p>
+      </div>
+    `;
+
+    const confirmRes = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${RESEND_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: "Kaivalya Library <onboarding@resend.dev>",
+        to: [email],
+        subject: "We received your message — Kaivalya Library",
+        html: confirmationHtml,
+      }),
+    });
+
+    const confirmData = await confirmRes.json();
+    if (!confirmRes.ok) {
+      console.error("Resend error (confirmation):", confirmData);
+    } else {
+      console.log("Confirmation email sent:", confirmData);
+    }
 
     return new Response(
-      JSON.stringify({ success: true, message: "Form submitted and notification sent" }),
+      JSON.stringify({ success: true, message: "Form submitted and emails sent" }),
       { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   } catch (err) {
