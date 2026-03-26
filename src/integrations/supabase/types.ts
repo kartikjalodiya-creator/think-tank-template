@@ -44,6 +44,33 @@ export type Database = {
         }
         Relationships: []
       }
+      seats: {
+        Row: {
+          id: string
+          is_occupied: boolean
+          occupant_name: string | null
+          partition_number: number
+          seat_number: number
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          is_occupied?: boolean
+          occupant_name?: string | null
+          partition_number: number
+          seat_number: number
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          is_occupied?: boolean
+          occupant_name?: string | null
+          partition_number?: number
+          seat_number?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
