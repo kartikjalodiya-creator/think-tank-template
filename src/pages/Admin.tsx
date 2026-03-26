@@ -165,12 +165,26 @@ const Admin = () => {
                     {seat.seat_number}
                   </button>
                   {seat.is_occupied && (
-                    <Input
-                      className="h-7 text-xs"
-                      placeholder="Name"
-                      defaultValue={seat.occupant_name || ""}
-                      onBlur={(e) => updateOccupantName(seat, e.target.value)}
-                    />
+                    <div className="space-y-1">
+                      <Input
+                        className="h-7 text-xs"
+                        placeholder="Name"
+                        defaultValue={seat.occupant_name || ""}
+                        onBlur={(e) => updateSeatDetails(seat, { occupant_name: e.target.value || null })}
+                      />
+                      <Input
+                        className="h-7 text-xs"
+                        placeholder="Description"
+                        defaultValue={seat.description || ""}
+                        onBlur={(e) => updateSeatDetails(seat, { description: e.target.value || null })}
+                      />
+                      <Input
+                        className="h-7 text-xs"
+                        placeholder="Fees (₹)"
+                        defaultValue={seat.fees || ""}
+                        onBlur={(e) => updateSeatDetails(seat, { fees: e.target.value || null })}
+                      />
+                    </div>
                   )}
                 </div>
               ))}
