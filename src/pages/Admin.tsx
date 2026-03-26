@@ -11,6 +11,8 @@ type Seat = {
   seat_number: number;
   is_occupied: boolean;
   occupant_name: string | null;
+  description: string | null;
+  fees: string | null;
 };
 
 const Admin = () => {
