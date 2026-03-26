@@ -131,6 +131,9 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Seat Availability */}
+      <SeatMap />
+
       {/* CTA */}
       <section className="py-28 bg-gradient-section">
         <ScrollReveal className="container mx-auto px-6 text-center max-w-2xl">
