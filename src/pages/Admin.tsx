@@ -76,10 +76,10 @@ const Admin = () => {
     }
   };
 
-  const updateOccupantName = async (seat: Seat, name: string) => {
+  const updateSeatDetails = async (seat: Seat, fields: Partial<Pick<Seat, 'occupant_name' | 'description' | 'fees'>>) => {
     await supabase
       .from("seats")
-      .update({ occupant_name: name || null, updated_at: new Date().toISOString() })
+      .update({ ...fields, updated_at: new Date().toISOString() })
       .eq("id", seat.id);
     fetchSeats();
   };
