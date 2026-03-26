@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Wifi, BookOpen, MapPin, Clock, Volume2, ArrowRight, Cctv } from "lucide-react";
 import { motion } from "framer-motion";
 import ScrollReveal from "@/components/ScrollReveal";
+import SeatMap from "@/components/SeatMap";
 import heroImage from "@/assets/hero-library.jpg";
 
 const highlights = [
@@ -129,6 +130,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Seat Availability */}
+      <SeatMap />
 
       {/* CTA */}
       <section className="py-28 bg-gradient-section">
