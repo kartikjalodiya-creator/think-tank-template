@@ -11,6 +11,8 @@ type Seat = {
   seat_number: number;
   is_occupied: boolean;
   occupant_name: string | null;
+  description: string | null;
+  fees: string | null;
 };
 
 const Admin = () => {
@@ -74,10 +76,10 @@ const Admin = () => {
     }
   };
 
-  const updateOccupantName = async (seat: Seat, name: string) => {
+  const updateSeatDetails = async (seat: Seat, fields: Partial<Pick<Seat, 'occupant_name' | 'description' | 'fees'>>) => {
     await supabase
       .from("seats")
-      .update({ occupant_name: name || null, updated_at: new Date().toISOString() })
+      .update({ ...fields, updated_at: new Date().toISOString() })
       .eq("id", seat.id);
     fetchSeats();
   };
@@ -163,12 +165,26 @@ const Admin = () => {
                     {seat.seat_number}
                   </button>
                   {seat.is_occupied && (
-                    <Input
-                      className="h-7 text-xs"
-                      placeholder="Name"
-                      defaultValue={seat.occupant_name || ""}
-                      onBlur={(e) => updateOccupantName(seat, e.target.value)}
-                    />
+                    <div className="space-y-1">
+                      <Input
+                        className="h-7 text-xs"
+                        placeholder="Name"
+                        defaultValue={seat.occupant_name || ""}
+                        onBlur={(e) => updateSeatDetails(seat, { occupant_name: e.target.value || null })}
+                      />
+                      <Input
+                        className="h-7 text-xs"
+                        placeholder="Description"
+                        defaultValue={seat.description || ""}
+                        onBlur={(e) => updateSeatDetails(seat, { description: e.target.value || null })}
+                      />
+                      <Input
+                        className="h-7 text-xs"
+                        placeholder="Fees (₹)"
+                        defaultValue={seat.fees || ""}
+                        onBlur={(e) => updateSeatDetails(seat, { fees: e.target.value || null })}
+                      />
+                    </div>
                   )}
                 </div>
               ))}

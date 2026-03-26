@@ -46,6 +46,8 @@ export type Database = {
       }
       seats: {
         Row: {
+          description: string | null
+          fees: string | null
           id: string
           is_occupied: boolean
           occupant_name: string | null
@@ -54,6 +56,8 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          description?: string | null
+          fees?: string | null
           id?: string
           is_occupied?: boolean
           occupant_name?: string | null
@@ -62,6 +66,8 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          description?: string | null
+          fees?: string | null
           id?: string
           is_occupied?: boolean
           occupant_name?: string | null
