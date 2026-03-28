@@ -167,18 +167,21 @@ const Admin = () => {
                   {seat.is_occupied && (
                     <div className="space-y-1">
                       <Input
+                        key={`name-${seat.id}-${seat.occupant_name}`}
                         className="h-7 text-xs"
                         placeholder="Name"
                         defaultValue={seat.occupant_name || ""}
                         onBlur={(e) => updateSeatDetails(seat, { occupant_name: e.target.value || null })}
                       />
                       <Input
+                        key={`desc-${seat.id}-${seat.description}`}
                         className="h-7 text-xs"
                         placeholder="Description"
                         defaultValue={seat.description || ""}
                         onBlur={(e) => updateSeatDetails(seat, { description: e.target.value || null })}
                       />
                       <Input
+                        key={`fees-${seat.id}-${seat.fees}`}
                         className="h-7 text-xs"
                         placeholder="Fees (₹)"
                         defaultValue={seat.fees || ""}
